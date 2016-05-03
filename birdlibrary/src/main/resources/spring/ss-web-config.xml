@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:jaxrs="http://cxf.apache.org/jaxrs"
+       xsi:schemaLocation=
+               "http://www.springframework.org/schema/beans
+                http://www.springframework.org/schema/beans/spring-beans.xsd
+                http://cxf.apache.org/jaxrs
+                http://cxf.apache.org/schemas/jaxrs.xsd">
+
+    <import resource="classpath:META-INF/cxf/cxf.xml" />
+    <import resource="classpath:META-INF/cxf/cxf-servlet.xml" />
+
+    <jaxrs:server id="public" address="/services/v1">
+        <jaxrs:properties>
+            <entry key="org.apache.cxf.propagate.exception" value="true"/>
+        </jaxrs:properties>
+        <jaxrs:serviceBeans>
+            <ref bean="birdServiceImpl"/>
+        </jaxrs:serviceBeans>
+        <jaxrs:providers>
+            <ref bean="jaxbProvider"/>
+            <ref bean="notFoundExceptionMapper"/>
+            <ref bean="parseException"/>
+            <ref bean="throwableMapper"/>
+            <ref bean="webApplicationExceptionMapper"/>
+            <ref bean="mongoTimeoutExceptionMapper"/>
+        </jaxrs:providers>
+    </jaxrs:server>
+
+    <!-- Format providers -->
+    <bean id="jaxbProvider" class="org.codehaus.jackson.jaxrs.JacksonJaxbJsonProvider"/>
+
+    <bean id="birdServiceImpl" class="com.ss.apoorv.services.impl.BirdServiceImpl"/>
+
+    <bean id="notFoundExceptionMapper" class="com.ss.apoorv.handlers.NotFoundExceptionMapper"/>
+    <bean id="parseException" class="com.ss.apoorv.handlers.ParseExceptionMapper"/>
+    <bean id="throwableMapper" class="com.ss.apoorv.handlers.ThrowableMapper"/>
+	<bean id="webApplicationExceptionMapper" class="com.ss.apoorv.handlers.WebApplicationExceptionMapper" />
+	<bean id="mongoTimeoutExceptionMapper" class="com.ss.apoorv.handlers.MongoTimeoutExceptionMapper"/>
+
+    <bean id="birdManager" class="com.ss.apoorv.manager.BirdManager"/>
+</beans>

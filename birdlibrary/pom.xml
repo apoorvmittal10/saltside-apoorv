@@ -1,0 +1,237 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.ss.test</groupId>
+  <artifactId>ss</artifactId>
+  <packaging>war</packaging>
+  <version>1.0-SNAPSHOT</version>
+  <name>SS Bird Test</name>
+  <url>http://maven.apache.org</url>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.java.version>1.8</project.java.version>
+
+    <!-- spring dependencies version -->
+    <spring.version>4.2.5.RELEASE</spring.version>
+
+    <!-- cxf version -->
+    <cxf.version>3.1.6</cxf.version>
+    <javax.ws.rs.version>2.0.1</javax.ws.rs.version>
+
+    <!-- parsers version -->
+    <jackson.version>1.9.13</jackson.version>
+    <json.schema.parser.version>0.4.22</json.schema.parser.version>
+    <jackson.core.version>2.0.0</jackson.core.version>
+
+    <!-- logging dependencies version -->
+    <slf4j.log.version>1.7.12</slf4j.log.version>
+
+    <maven.compiler.plugin.version>2.3.2</maven.compiler.plugin.version>
+    <apache.resources.plugin.version>2.7</apache.resources.plugin.version>
+    <apache.commons.lang.version>2.4</apache.commons.lang.version>
+
+    <!-- spring data mongodb version -->
+    <spring.data.mongodb.version>1.8.0.RELEASE</spring.data.mongodb.version>
+
+    <!-- junit version-->
+    <junit.version>4.12</junit.version>
+    <javax.servlet.version>3.1.0</javax.servlet.version>
+  </properties>
+
+  <dependencies>
+
+    <!-- Spring dependencies -->
+
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-core</artifactId>
+      <version>${spring.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-context</artifactId>
+      <version>${spring.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-context-support</artifactId>
+      <version>${spring.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-webmvc</artifactId>
+      <version>${spring.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework.data</groupId>
+      <artifactId>spring-data-mongodb</artifactId>
+      <version>${spring.data.mongodb.version}</version>
+    </dependency>
+
+    <!-- logging dependencies -->
+
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+      <version>${slf4j.log.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-log4j12</artifactId>
+      <version>${slf4j.log.version}</version>
+    </dependency>
+
+    <!-- cxf dependencies -->
+
+    <dependency>
+      <groupId>org.apache.cxf</groupId>
+      <artifactId>cxf-rt-frontend-jaxrs</artifactId>
+      <version>${cxf.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.cxf</groupId>
+      <artifactId>cxf-rt-transports-http</artifactId>
+      <version>${cxf.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.cxf</groupId>
+      <artifactId>cxf-rt-rs-extension-providers</artifactId>
+      <version>${cxf.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.apache.cxf</groupId>
+      <artifactId>cxf-rt-frontend-jaxws</artifactId>
+      <version>${cxf.version}</version>
+      <exclusions>
+        <exclusion>
+          <artifactId>asm</artifactId>
+          <groupId>asm</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>jaxb-core</artifactId>
+          <groupId>com.sun.xml.bind</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>cxf-rt-bindings-soap</artifactId>
+          <groupId>org.apache.cxf</groupId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+
+    <dependency>
+      <groupId>javax.ws.rs</groupId>
+      <artifactId>javax.ws.rs-api</artifactId>
+      <version>${javax.ws.rs.version}</version>
+    </dependency>
+
+    <!-- json parsing schema dependencies-->
+
+    <dependency>
+      <groupId>org.jsonschema2pojo</groupId>
+      <artifactId>jsonschema2pojo-maven-plugin</artifactId>
+      <version>${json.schema.parser.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>commons-lang</groupId>
+      <artifactId>commons-lang</artifactId>
+      <version>${apache.commons.lang.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-databind</artifactId>
+      <version>${jackson.core.version}</version>
+    </dependency>
+
+    <!-- json parser dependencies -->
+
+    <dependency>
+      <groupId>org.codehaus.jackson</groupId>
+      <artifactId>jackson-jaxrs</artifactId>
+      <version>${jackson.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.codehaus.jackson</groupId>
+      <artifactId>jackson-xc</artifactId>
+      <version>${jackson.version}</version>
+    </dependency>
+
+    <!-- test dependencies-->
+
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>${junit.version}</version>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-test</artifactId>
+      <version>${spring.version}</version>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>javax.servlet-api</artifactId>
+      <version>${javax.servlet.version}</version>
+      <scope>test</scope>
+    </dependency>
+
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>${maven.compiler.plugin.version}</version>
+        <configuration>
+          <source>${project.java.version}</source>
+          <target>${project.java.version}</target>
+        </configuration>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-resources-plugin</artifactId>
+        <version>${apache.resources.plugin.version}</version>
+        <configuration>
+          <encoding>UTF-8</encoding>
+        </configuration>
+      </plugin>
+
+      <!-- plugin for parsing schema and generating pojo-->
+      <plugin>
+        <groupId>org.jsonschema2pojo</groupId>
+        <artifactId>jsonschema2pojo-maven-plugin</artifactId>
+        <version>0.4.17</version>
+        <executions>
+
+          <execution>
+            <id>birds</id>
+            <goals>
+              <goal>generate</goal>
+            </goals>
+            <configuration>
+              <sourceDirectory>${basedir}/src/main/resources/schema/</sourceDirectory>
+              <targetPackage>com.ss.apoorv.bo.transport</targetPackage>
+            </configuration>
+          </execution>
+
+        </executions>
+      </plugin>
+    </plugins>
+
+    <finalName>ss</finalName>
+  </build>
+</project>

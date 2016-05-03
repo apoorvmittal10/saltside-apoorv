@@ -1,0 +1,70 @@
+*/target
+
+# Ignore idea IDE files
+*.iml
+.idea/*
+
+*.class
+
+# Package Files #
+*.jar
+*.war
+*.ear
+
+# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+hs_err_pid*
+
+# Executables
+*.exe
+*.out
+*.app
+
+# User-specific files
+*.suo
+*.user
+*.sln.docstates
+
+# Xcode
+build/
+!sources/client/build/
+*.pbxuser
+!default.pbxuser
+*.mode1v3
+!default.mode1v3
+*.mode2v3
+!default.mode2v3
+*.perspectivev3
+!default.perspectivev3
+xcuserdata
+*.xccheckout
+profile
+*.moved-aside
+DerivedData
+*.hmap
+*.ipa
+
+# Eclipse ignores
+*.project
+*.prefs
+*.classpath
+.settings/
+target/
+.springBeans
+project/.idea
+*.exec
+*.log
+
+# Ignore folder containing intermediate files
+obj/
+.idea/
+
+# Linux swap files
+*~
+
+# KDE directory preferences
+.directory
+
+# Linux trash folder which might appear on any partition or disk
+.Trash-*
+
+*/logs

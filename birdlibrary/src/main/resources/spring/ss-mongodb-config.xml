@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:mongo="http://www.springframework.org/schema/data/mongo"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/data/mongo
+       http://www.springframework.org/schema/data/mongo/spring-mongo-1.0.xsd">
+
+    <mongo:mongo replica-set="${ss.apoorv.mongo.replicaset}" id="mongo">
+        <mongo:options connections-per-host="${ss.apoorv.mongo.connectionsPerHost}"
+                       threads-allowed-to-block-for-connection-multiplier="${ss.apoorv.mongo.threadsAllowedToBlockForConnectionMultiplier}"
+                       connect-timeout="${ss.apoorv.mongo.connectTimeout}"
+                       max-wait-time="${ss.apoorv.mongo.maxWaitTime}"
+                       auto-connect-retry="${ss.apoorv.mongo.autoConnectRetry}"
+                       socket-keep-alive="${ss.apoorv.mongo.socketKeepAlive}"
+                       socket-timeout="${ss.apoorv.mongo.socketTimeout}"
+                       slave-ok="${ss.apoorv.mongo.slaveOk}"
+                       write-number="${ss.apoorv.mongo.writeNumber}"
+                       write-timeout="${ss.apoorv.mongo.writeTimeout}"
+                       write-fsync="${ss.apoorv.mongo.writeFSync}"/>
+    </mongo:mongo>
+
+    <mongo:db-factory dbname="${ss.apoorv.mongo.dbname}" mongo-ref="mongo" id="mongoDbFactory" username="${ss.apoorv.mongo.dbuser}"
+                      password="${ss.apoorv.mongo.dbpassword}"/>
+
+    <bean id="mappingContext" class="org.springframework.data.mongodb.core.mapping.MongoMappingContext" />
+
+    <bean id="defaultMongoTypeMapper"
+          class="org.springframework.data.mongodb.core.convert.DefaultMongoTypeMapper">
+        <constructor-arg name="typeKey"><null/></constructor-arg>
+    </bean>
+
+    <bean id="mappingMongoConverter" class="org.springframework.data.mongodb.core.convert.MappingMongoConverter">
+        <constructor-arg name="mongoDbFactory" ref="mongoDbFactory" />
+        <constructor-arg name="mappingContext" ref="mappingContext" />
+        <property name="typeMapper" ref="defaultMongoTypeMapper" />
+    </bean>
+
+    <bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
+        <constructor-arg name="mongoDbFactory" ref="mongoDbFactory" />
+        <constructor-arg name="mongoConverter" ref="mappingMongoConverter" />
+    </bean>
+
+    <context:component-scan base-package="com.ss.apoorv.mongo.repositories"></context:component-scan>
+
+    <mongo:repositories base-package="com.ss.apoorv.mongo.repositories" mongo-template-ref="mongoTemplate"/>
+
+</beans>
